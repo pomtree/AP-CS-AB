@@ -56,18 +56,6 @@ public class Holes2 {
 
         }
     }
-
-    public static boolean acont(char[][] a) {
-        for (char[] r : a) {
-            for (char c : r) {
-                if (c == '.') {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public static void print(char[][] a) {
         for (char[] r : a) {
             for (char c : r) {
