@@ -243,11 +243,28 @@ public class Checkpoint {
             for (int i = 0; i < bc.size(); i++) {
                 bc_a[i] = bc.get(i);
             }
-            test(CASES, 5, 8, start[0], start[1], cps[0][0], cps[0][1], bc_a);
-            for (int cpn = 1; cpn - 1 < cp; cpn++) {
-                test(CASES, 5, 8, start[0], start[1], cps[cpn][0], cps[cpn][1], bc_a);
+
+
+            if (cp == 1) {
+                test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
+                test(CASES, h, l, cps[0][0], cps[0][1], end[0], end[1], bc_a);
             }
-            test(CASES, 5, 8, cps[cps.length - 1][0], cps[cps.length - 1][1], end[0], end[1], bc_a);
+            if (cp == 0) {
+                test(CASES, h, l, start[0], start[1], end[0], end[1], bc_a);
+            }
+            if (cp > 1) {
+                test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
+
+                for (int cpn = 0; cpn < cps.length - 1; cpn++) {
+                    test(CASES, h, l, cps[cpn][0], cps[cpn][1], cps[cpn + 1][0], cps[cpn + 1][1], bc_a);
+
+                }
+
+                test(CASES, h, l, cps[cps.length - 1][0], cps[cps.length - 1][1], end[0], end[1], bc_a);
+            }
+
+
+
 
 
         }
