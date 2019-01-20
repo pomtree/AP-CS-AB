@@ -1,6 +1,8 @@
 package stat;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 /*
 
@@ -8,7 +10,7 @@ http://www.codebytes.in/2015/02/a-shortest-path-finding-algorithm.html
 
  */
 
-public class AStarDemo {
+public class Checkpoint {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
     //Blocked cells are just null Cell values in grid
@@ -150,10 +152,10 @@ public class AStarDemo {
         System.out.println("Grid: ");
         for (int i = 0; i < x; ++i) {
             for (int j = 0; j < y; ++j) {
-                if (i == si && j == sj) System.out.print("SO  "); //Source
-                else if (i == ei && j == ej) System.out.print("DE  ");  //Destination
-                else if (grid[i][j] != null) System.out.printf("%-3d ", 0);
-                else System.out.print("BL  ");
+                if (i == si && j == sj) System.out.print("S "); //Source
+                else if (i == ei && j == ej) System.out.print("E ");  //Destination
+                else if (grid[i][j] != null) System.out.print(". ");
+                else System.out.print("# ");
             }
             System.out.println();
         }
@@ -184,11 +186,67 @@ public class AStarDemo {
     }
 
     public static void main(String[] args) {
-        test(1, 5, 5, 0, 0, 3, 2, new int[][]{{0, 4}, {2, 2}, {3, 1}, {3, 3}});
-        test(2, 5, 5, 0, 0, 4, 4, new int[][]{{0, 4}, {2, 2}, {3, 1}, {3, 3}});
-        test(3, 7, 7, 2, 1, 5, 4, new int[][]{{4, 1}, {4, 3}, {5, 3}, {2, 3}});
+        //  int[][] ex1_blocked = new int[][]{{1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {4, 2}, {1, 3}, {2, 3}, {4, 3}, {5, 3}, {6, 3}};
+        // int[][] ex1_blocked = new int[][]{{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 4}, {3, 1}, {3, 2}, {3,3}, {3, 4}, {3, 5}, {3, 6}};
+        // test(1, 5,8, 0, 0, 2,5, ex1_blocked);
+        System.out.println((int) '1');
+        System.out.println((int) '9');
+        Scanner s = new Scanner(System.in);
+        for (int CASES = s.nextInt(); CASES > 0; CASES--) {
+            int h = s.nextInt();
+            int l = s.nextInt();
+            int cp = s.nextInt();
+            String lines[] = new String[h];
+            s.nextLine();
+            for (int i = 0; i < h; i++) {
+                lines[i] = s.nextLine();
+                //System.out.println("line " + i + " = " + lines[i]);
+            }
+            //input so far:
+            System.out.println("h = " + h);
+            System.out.println("l = " + l);
+            System.out.println("c = " + cp);
+            for (String line : lines) {
+                System.out.println(line);
+            }
+            ArrayList<int[]> bc = new ArrayList<>();
+            int[] start = new int[2];
+            int[] end = new int[2];
+            int[][] cps = new int[cp][];
+            for (int i = 0; i < lines.length; i++) {
+                String line = lines[i];
+                for (int c = 0; c < line.length(); c++) {
+                    char ch = line.charAt(c);
+                    if (ch == '#') {
+                        bc.add(new int[]{i, c});
+                        System.out.println("blockage at " + i + ", " + c);
+                    }
+                    if (ch == 'E') {
+                        end[0] = i;
+                        end[1] = c;
+                        System.out.println("end point at " + i + ", " + c);
+                    }
+                    if (ch == 'S') {
+                        start[0] = i;
+                        start[1] = c;
+                        System.out.println("start point at " + i + ", " + c);
+                    }
+                    if (ch >= 49 && ch <= 57) {
+                        int cpn = ch - 48;
+                        cps[cpn - 1] = new int[]{i, c};
+                        System.out.println("check point" + cpn + " at " + i + ", " + c);
+                    }
+                }
+            }
 
-        test(1, 5, 5, 0, 0, 4, 4, new int[][]{{3, 4}, {3, 3}, {4, 3}});
+            int[][] bc_a = new int[bc.size()][];
+            for (int i = 0; i < bc.size(); i++) {
+                bc_a[i] = bc.get(i);
+            }
+            test(CASES, 5, 8, start[0], start[1], end[0], end[1], bc_a);
+
+
+        }
 
 
     }
@@ -210,3 +268,17 @@ public class AStarDemo {
         }
     }
 }
+/*
+test code to paste into terminal:
+*/
+
+/*
+1
+5 8 2
+S....1..
+.######.
+..2.#...
+.######.
+......E.
+
+ */
