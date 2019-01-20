@@ -10,6 +10,7 @@ http://www.codebytes.in/2015/02/a-shortest-path-finding-algorithm.html
 
  */
 
+@SuppressWarnings("Duplicates")
 public class Checkpoint {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
@@ -113,8 +114,9 @@ public class Checkpoint {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static void test(int tCase, int x, int y, int si, int sj, int ei, int ej, int[][] blocked) {
-        System.out.println("\n\nTest Case #" + tCase);
+    public static int test(int tCase, int x, int y, int si, int sj, int ei, int ej, int[][] blocked) {
+        int len = 0;
+        //System.out.println("\n\nTest Case #" + tCase);
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -134,9 +136,9 @@ public class Checkpoint {
             for (int j = 0; j < y; ++j) {
                 grid[i][j] = new Cell(i, j);
                 grid[i][j].heuristicCost = Math.abs(i - endI) + Math.abs(j - endJ);
-//                  System.out.print(grid[i][j].heuristicCost+" ");
+//                  //System.out.print(grid[i][j].heuristicCost+" ");
             }
-//              System.out.println();
+//              //System.out.println();
         }
         grid[si][sj].finalCost = 0;
 
@@ -149,48 +151,50 @@ public class Checkpoint {
         }
 
         //Display initial map
-        System.out.println("Grid: ");
+        //System.out.println("Grid: ");
         for (int i = 0; i < x; ++i) {
             for (int j = 0; j < y; ++j) {
-                if (i == si && j == sj) System.out.print("S "); //Source
-                else if (i == ei && j == ej) System.out.print("E ");  //Destination
-                else if (grid[i][j] != null) System.out.print(". ");
-                else System.out.print("# ");
+                //  if (i == si && j == sj) //System.out.print("S "); //Source
+                //  else if (i == ei && j == ej) //System.out.print("E ");  //Destination
+                //  else if (grid[i][j] != null) //System.out.print(". ");
+                //  else //System.out.print("# ");
             }
-            System.out.println();
+            //System.out.println();
         }
-        System.out.println();
+        //System.out.println();
 
         AStar();
-        System.out.println("\nScores for cells: ");
+        //System.out.println("\nScores for cells: ");
         for (int i = 0; i < x; ++i) {
             for (int j = 0; j < x; ++j) {
-                if (grid[i][j] != null) System.out.printf("%-3d ", grid[i][j].finalCost);
-                else System.out.print("BL  ");
+                // if (grid[i][j] != null) //System.out.printf("%-3d ", grid[i][j].finalCost);
+                // else //System.out.print("BL  ");
             }
-            System.out.println();
+            //System.out.println();
         }
-        System.out.println();
+        //System.out.println();
 
         if (closed[endI][endJ]) {
             //Trace back the path
-            System.out.println("Path: ");
+            //System.out.println("Path: ");
             Cell current = grid[endI][endJ];
-            System.out.print(current);
+            //System.out.print(current);
             while (current.parent != null) {
-                System.out.print(" -> " + current.parent);
+                //System.out.print(" -> " + current.parent);
+                len++;
                 current = current.parent;
             }
-            System.out.println();
-        } else System.out.println("No possible path");
+            //System.out.println();
+        } //else //System.out.println("No possible path");
+        return len;
     }
 
     public static void main(String[] args) {
         //  int[][] ex1_blocked = new int[][]{{1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {4, 2}, {1, 3}, {2, 3}, {4, 3}, {5, 3}, {6, 3}};
         // int[][] ex1_blocked = new int[][]{{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {2, 4}, {3, 1}, {3, 2}, {3,3}, {3, 4}, {3, 5}, {3, 6}};
         // test(1, 5,8, 0, 0, 2,5, ex1_blocked);
-        System.out.println((int) '1');
-        System.out.println((int) '9');
+        //System.out.println((int) '1');
+        //System.out.println((int) '9');
         Scanner s = new Scanner(System.in);
         for (int CASES = s.nextInt(); CASES > 0; CASES--) {
             int h = s.nextInt();
@@ -200,14 +204,14 @@ public class Checkpoint {
             s.nextLine();
             for (int i = 0; i < h; i++) {
                 lines[i] = s.nextLine();
-                //System.out.println("line " + i + " = " + lines[i]);
+                ////System.out.println("line " + i + " = " + lines[i]);
             }
             //input so far:
-            System.out.println("h = " + h);
-            System.out.println("l = " + l);
-            System.out.println("c = " + cp);
+            //System.out.println("h = " + h);
+            //System.out.println("l = " + l);
+            //System.out.println("c = " + cp);
             for (String line : lines) {
-                System.out.println(line);
+                //System.out.println(line);
             }
             ArrayList<int[]> bc = new ArrayList<>();
             int[] start = new int[2];
@@ -219,22 +223,22 @@ public class Checkpoint {
                     char ch = line.charAt(c);
                     if (ch == '#') {
                         bc.add(new int[]{i, c});
-                        System.out.println("blockage at " + i + ", " + c);
+                        //System.out.println("blockage at " + i + ", " + c);
                     }
                     if (ch == 'E') {
                         end[0] = i;
                         end[1] = c;
-                        System.out.println("end point at " + i + ", " + c);
+                        //System.out.println("end point at " + i + ", " + c);
                     }
                     if (ch == 'S') {
                         start[0] = i;
                         start[1] = c;
-                        System.out.println("start point at " + i + ", " + c);
+                        //System.out.println("start point at " + i + ", " + c);
                     }
                     if (ch >= 49 && ch <= 57) {
                         int cpn = ch - 48;
                         cps[cpn - 1] = new int[]{i, c};
-                        System.out.println("check point" + cpn + " at " + i + ", " + c);
+                        //System.out.println("check point" + cpn + " at " + i + ", " + c);
                     }
                 }
             }
@@ -244,27 +248,24 @@ public class Checkpoint {
                 bc_a[i] = bc.get(i);
             }
 
-
+            int t_len = 0;
             if (cp == 1) {
-                test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
-                test(CASES, h, l, cps[0][0], cps[0][1], end[0], end[1], bc_a);
+                t_len += test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
+                t_len += test(CASES, h, l, cps[0][0], cps[0][1], end[0], end[1], bc_a);
             }
             if (cp == 0) {
-                test(CASES, h, l, start[0], start[1], end[0], end[1], bc_a);
+                t_len += test(CASES, h, l, start[0], start[1], end[0], end[1], bc_a);
             }
             if (cp > 1) {
-                test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
+                t_len += test(CASES, h, l, start[0], start[1], cps[0][0], cps[0][1], bc_a);
 
                 for (int cpn = 0; cpn < cps.length - 1; cpn++) {
-                    test(CASES, h, l, cps[cpn][0], cps[cpn][1], cps[cpn + 1][0], cps[cpn + 1][1], bc_a);
-
+                    t_len += test(CASES, h, l, cps[cpn][0], cps[cpn][1], cps[cpn + 1][0], cps[cpn + 1][1], bc_a);
                 }
-
-                test(CASES, h, l, cps[cps.length - 1][0], cps[cps.length - 1][1], end[0], end[1], bc_a);
+                t_len += test(CASES, h, l, cps[cps.length - 1][0], cps[cps.length - 1][1], end[0], end[1], bc_a);
             }
-
-
-
+            //System.out.println("total length = " + t_len);
+            System.out.println(t_len);
 
 
         }
