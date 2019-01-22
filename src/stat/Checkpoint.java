@@ -12,7 +12,6 @@ http://www.codebytes.in/2015/02/a-shortest-path-finding-algorithm.html
 
 @SuppressWarnings("Duplicates")
 public class Checkpoint {
-    public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
     //Blocked cells are just null Cell values in grid
     static Cell[][] grid = new Cell[5][5];
@@ -67,16 +66,6 @@ public class Checkpoint {
             if (current.i - 1 >= 0) {
                 t = grid[current.i - 1][current.j];
                 checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
-
-                if (current.j - 1 >= 0) {
-                    t = grid[current.i - 1][current.j - 1];
-                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-                }
-
-                if (current.j + 1 < grid[0].length) {
-                    t = grid[current.i - 1][current.j + 1];
-                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-                }
             }
 
             if (current.j - 1 >= 0) {
@@ -93,15 +82,6 @@ public class Checkpoint {
                 t = grid[current.i + 1][current.j];
                 checkAndUpdateCost(current, t, current.finalCost + V_H_COST);
 
-                if (current.j - 1 >= 0) {
-                    t = grid[current.i + 1][current.j - 1];
-                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-                }
-
-                if (current.j + 1 < grid[0].length) {
-                    t = grid[current.i + 1][current.j + 1];
-                    checkAndUpdateCost(current, t, current.finalCost + DIAGONAL_COST);
-                }
             }
         }
     }
