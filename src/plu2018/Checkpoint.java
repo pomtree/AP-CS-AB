@@ -1,4 +1,4 @@
-package stat;
+package plu2018;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

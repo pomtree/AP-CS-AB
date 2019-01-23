@@ -1,4 +1,4 @@
-package stat;
+package plu2018;
 
 public class Ornaments {
     public static void main(String args[]) {
