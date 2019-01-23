@@ -1,4 +1,4 @@
-package plu2018;
+package plu2018.Old;
 
 public class Dijkstra {
     public static void main(String args[]) {
