@@ -30,8 +30,6 @@ public class CheckpointDK {
             if (print)
                 for (int i = 0; i < y_dim; i++)
                     System.out.println(l_grid[i]);
-
-
         }
 
 
