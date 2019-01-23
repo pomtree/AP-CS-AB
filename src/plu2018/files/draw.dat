@@ -1,0 +1,9 @@
+8
+rectangle 3 5 n
+rectangle 3 7 y
+right triangle 4 n
+right triangle 4 y
+left triangle 5 n
+left triangle 4 y
+diamond 11 y
+diamond 5 n
