@@ -8,7 +8,8 @@ public class Dijkstra {
         //-1 = start
         //-2 = end
         print_grid(grid);
-        int[] current = new int[2];
+        //int[] current = new int[2];
+        int cx = -1, cy = -1;
         int[][] score = new int[grid.length][grid[0].length];
         boolean[][] visited = new boolean[grid.length][grid[0].length];
         for (int a = 0; a < grid.length; a++) {
@@ -16,7 +17,8 @@ public class Dijkstra {
                 score[a][i] = 500;
                 if (grid[a][i] == -1) {
                     score[a][i] = 0;
-                    current = new int[]{a, i};
+                    cx = a;
+                    cy = i;
                 }
                 if (grid[a][i] == 1) {
                     score[a][i] = 501;
@@ -28,51 +30,50 @@ public class Dijkstra {
         for (int itest = 1; itest < 150; itest++) {
             System.out.println("Iteration " + itest);
             //1 up
-            int[] new_current = new int[2];
-            new_current[0] = -1;
-            if (current[1] + 1 < grid.length && grid[current[0]][current[1] + 1] != 1) {
-                score[current[0]][current[1] + 1] = Math.min(score[current[0]][current[1] + 1], score[current[0]][current[1]] + 1);
-                if (!visited[current[0]][current[1] + 1]) {
-                    new_current[0] = current[0];
-                    new_current[1] = current[1] + 1;
+            int new_cx = -1, new_cy = -1;
+            if (cy + 1 < grid.length && grid[cx][cy + 1] != 1) {
+                score[cx][cy + 1] = Math.min(score[cx][cy + 1], score[cx][cy] + 1);
+                if (!visited[cx][cy + 1]) {
+                    new_cx = cx;
+                    new_cy = cy + 1;
                 }
             }
             //1 down
-            if (current[1] - 1 >= 0 && grid[current[0]][current[1] - 1] != 1) {
-                score[current[0]][current[1] - 1] = Math.min(score[current[0]][current[1] - 1], score[current[0]][current[1]] + 1);
-                if (!visited[current[0]][current[1] - 1]) {
-                    new_current[0] = current[0];
-                    new_current[1] = current[1] - 1;
+            if (cy - 1 >= 0 && grid[cx][cy - 1] != 1) {
+                score[cx][cy - 1] = Math.min(score[cx][cy - 1], score[cx][cy] + 1);
+                if (!visited[cx][cy - 1]) {
+                    new_cx = cx;
+                    new_cy = cy - 1;
                 }
             }
             //1 left
-            if (current[0] - 1 >= 0 && grid[current[0] - 1][current[1]] != 1) {
-                score[current[0] - 1][current[1]] = Math.min(score[current[0] - 1][current[1]], score[current[0]][current[1]] + 1);
-                if (!visited[current[0] - 1][current[1]]) {
-                    new_current[0] = current[0] - 1;
-                    new_current[1] = current[1];
+            if (cx - 1 >= 0 && grid[cx - 1][cy] != 1) {
+                score[cx - 1][cy] = Math.min(score[cx - 1][cy], score[cx][cy] + 1);
+                if (!visited[cx - 1][cy]) {
+                    new_cx = cx - 1;
+                    new_cy = cy;
                 }
             }
             //1 right
-            if (current[0] + 1 < grid[0].length && grid[current[0] + 1][current[1]] != 1) {
-                score[current[0] + 1][current[1]] = Math.min(score[current[0] + 1][current[1] + 1], score[current[0]][current[1]] + 1);
-                if (!visited[current[0] + 1][current[1]]) {
-                    new_current[0] = current[0] + 1;
-                    new_current[1] = current[1];
+            if (cx + 1 < grid[0].length && grid[cx + 1][cy] != 1) {
+                score[cx + 1][cy] = Math.min(score[cx + 1][cy + 1], score[cx][cy] + 1);
+                if (!visited[cx + 1][cy]) {
+                    new_cx = cx + 1;
+                    new_cy = cy;
                 }
             }
 
-            if (grid[current[0]][current[1]] == -2) {
-                System.out.println("Path found. Distance = " + score[current[0]][current[1]]);
+            if (grid[cx][cy] == -2) {
+                System.out.println("Path found. Distance = " + score[cx][cy]);
                 return;
             }
-            visited[current[0]][current[1]] = true;
-            current[0] = new_current[0];
-            current[1] = new_current[1];
+            visited[cx][cy] = true;
+            cx = new_cx;
+            cy = new_cy;
 
 
             print_grid(grid);
-            print_current(current);
+            print_current(cx, cy);
             print_scores(score);
             print_visited(visited);
             System.out.println();
@@ -81,11 +82,11 @@ public class Dijkstra {
         }
     }
 
-    public static void print_current(int[] current) {
+    public static void print_current(int cx, int cy) {
         System.out.println();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                if (current[0] == i && current[1] == j)
+                if (cx == i && cy == j)
                     System.out.print(" C ");
                 else
                     System.out.print(" . ");
