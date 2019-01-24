@@ -1,6 +1,6 @@
 package plu2018.Dijkstra;
 
-class Dijkstra {
+public class Dijkstra {
     final int x;  //nodes per row
     final int y; //number of rows (nodes per column)
     int end_x;
@@ -9,7 +9,7 @@ class Dijkstra {
     int cx;         //current x
     int cy;         //current y
 
-    Dijkstra(int _x, int _y, int start_x, int start_y, int _end_x, int _end_y, boolean[][] blocked) {
+    public Dijkstra(int _x, int _y, int start_x, int start_y, int _end_x, int _end_y, boolean[][] blocked) {
         x = _x;
         y = _y;
         end_x = _end_x;
@@ -22,14 +22,12 @@ class Dijkstra {
                     grid[i][j].is_blocked = true;
             }
         }
-        grid[start_y][start_x].is_start = true;
         grid[start_y][start_x].score = 0;
-        grid[end_y][end_x].is_start = true;
         cx = start_x;
         cy = start_y;
     }
 
-    int shortest_distance() {
+    public int shortest_distance() {
         do {
             update_neighbors();
             grid[cy][cx].visited = true;

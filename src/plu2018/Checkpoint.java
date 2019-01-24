@@ -1,4 +1,6 @@
-package plu2018.Dijkstra;
+package plu2018;
+
+import plu2018.Dijkstra.Dijkstra;
 
 import java.io.File;
 import java.io.IOException;
