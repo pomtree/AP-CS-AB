@@ -8,7 +8,7 @@ import java.nio.file.Files;
 
 public class Bomb {
     public static void main(String args[]) throws IOException {
-        String[] lines = Files.readAllLines(new File("C:\\Users\\user\\IdeaProjects\\AP CS AB\\src\\plu2018\\files\\bomb.dat").toPath()).toArray(new String[0]);
+        String[] lines = Files.readAllLines(new File("C:\\Users\\user\\IdeaProjects\\AP CS AB\\src\\plu2018\\files\\bomb_test.dat").toPath()).toArray(new String[0]);
         int line_number = 1;
         for (int TC = Integer.parseInt(lines[0]); TC > 0; TC--) {
             String[] numbers = lines[line_number].split(" ");

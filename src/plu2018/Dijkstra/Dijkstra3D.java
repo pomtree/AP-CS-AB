@@ -66,7 +66,7 @@ public class Dijkstra3D {
         for (int l = 0; l < z; l++) {
             for (int i = 0; i < y; i++) {
                 for (int j = 0; j < x; j++) {
-                    if (grid[l][i][j].score < min && !grid[l][i][j].visited) {
+                    if (grid[l][i][j].score <= min && !grid[l][i][j].visited) {
                         min = grid[l][i][j].score;
                         cx = j;
                         cy = i;

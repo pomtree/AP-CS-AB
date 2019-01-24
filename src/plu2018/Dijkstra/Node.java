@@ -24,7 +24,7 @@ public class Node {
     public boolean tryNewScore3D(int new_score) {
         int cost = 0;
         if (is_blocked) cost = 1;
-        if (new_score + cost < score) {
+        if (new_score + cost <= score) {
             score = new_score + cost;
             return true;
         }
