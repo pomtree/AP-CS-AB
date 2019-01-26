@@ -1,11 +1,11 @@
 package plu2018.Dijkstra;
 
 public class Node {
-    int score;
-    boolean visited;
+    public int score;
+    public boolean visited;
     //boolean is_start;
     //boolean is_end;
-    boolean is_blocked;
+    public boolean is_blocked;
 
     public Node() {
         score = Integer.MAX_VALUE;
